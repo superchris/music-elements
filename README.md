@@ -2,6 +2,8 @@
 
 Web components for music: a tone generator and metronome.
 
+[Live Demo](https://superchris.github.io/music-elements/)
+
 ## Installation
 
 ```bash
