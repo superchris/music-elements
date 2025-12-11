@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A440 Tone Generator</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #1a1a2e;
+      color: #eee;
+    }
+    h1 {
+      color: #00d9ff;
+    }
+    .demo-section {
+      background: #16213e;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    button {
+      background: #00d9ff;
+      color: #1a1a2e;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #00b8d4;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    code {
+      background: #0f0f23;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    pre {
+      background: #0f0f23;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .status {
+      margin-top: 10px;
+      padding: 10px;
+      background: #0f0f23;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>A440 Tone Generator</h1>
+  <p>A custom HTML element that generates a 440 Hz sine wave tone (concert pitch A4).</p>
+
+  <div class="demo-section">
+    <h2>Basic Usage</h2>
+    <tone-generator id="basic-tone"></tone-generator>
+    <div class="status" id="basic-status">Status: Stopped</div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Custom Frequency</h2>
+    <p>This one plays C5 (523.25 Hz) instead:</p>
+    <tone-generator id="custom-tone" frequency="523.25"></tone-generator>
+  </div>
+
+  <div class="demo-section">
+    <h2>Metronome</h2>
+    <p>A click track at a configurable BPM:</p>
+    <metro-nome id="metronome" bpm="120"></metro-nome>
+    <div style="margin-top: 10px; display: flex; align-items: center; gap: 12px;">
+      <input type="range" id="bpm-slider" min="40" max="220" value="120"
+             oninput="document.getElementById('metronome').bpm = this.value; document.getElementById('bpm-value').textContent = this.value + ' BPM'">
+      <span id="bpm-value">120 BPM</span>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Code Examples</h2>
+    <h3>HTML</h3>
+    <pre><code>&lt;!-- Default 440 Hz --&gt;
+&lt;tone-generator&gt;&lt;/tone-generator&gt;
+
+&lt;!-- Custom frequency --&gt;
+&lt;tone-generator frequency="523.25"&gt;&lt;/tone-generator&gt;
+
+&lt;!-- Auto-play on load --&gt;
+&lt;tone-generator playing&gt;&lt;/tone-generator&gt;</code></pre>
+
+    <h3>JavaScript</h3>
+    <pre><code>const tone = document.querySelector('tone-generator');
+
+// Start/stop methods
+tone.start();
+tone.stop();
+tone.toggle();
+
+// Change frequency dynamically
+tone.frequency = 880;
+
+// Check if playing
+console.log(tone.playing);
+
+// Listen to events
+tone.addEventListener('tone-start', (e) => {
+  console.log('Started at', e.detail.frequency, 'Hz');
+});
+tone.addEventListener('tone-stop', () => {
+  console.log('Stopped');
+});</code></pre>
+  </div>
+
+  <script src="tone-generator.js"></script>
+  <script src="metronome.js"></script>
+  <script>
+    const basicTone = document.getElementById('basic-tone');
+    const statusEl = document.getElementById('basic-status');
+
+    basicTone.addEventListener('tone-start', (e) => {
+      statusEl.textContent = `Status: Playing at ${e.detail.frequency} Hz`;
+    });
+
+    basicTone.addEventListener('tone-stop', () => {
+      statusEl.textContent = 'Status: Stopped';
+    });
+  </script>
+</body>
+</html>
