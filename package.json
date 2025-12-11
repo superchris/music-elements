@@ -1,0 +1,40 @@
+{
+  "name": "music-elements",
+  "version": "1.0.0",
+  "description": "Web components for music: tone generator and metronome",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./tone-generator": "./tone-generator.js",
+    "./metronome": "./metronome.js"
+  },
+  "files": [
+    "index.js",
+    "tone-generator.js",
+    "metronome.js"
+  ],
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superchris/music-elements.git"
+  },
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "tone-generator",
+    "metronome",
+    "audio",
+    "music",
+    "music-elements"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/superchris/music-elements/issues"
+  },
+  "homepage": "https://github.com/superchris/music-elements#readme"
+}
